@@ -20,3 +20,6 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
 ]
+# include(module, namespace=None)[source]¶
+# include(pattern_list)
+# include((pattern_list, app_namespace), namespace=None)

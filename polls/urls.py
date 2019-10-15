@@ -5,3 +5,4 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
 ]
+# path(route, view, kwargs=None, name=None)
