@@ -1,41 +1,28 @@
 from rest_framework import serializers
 from polls.models import *
+from users.serializer import AppUserSimpleSerializer,AppUserSerializer
 # from users.serializers import AppUserSimpleSerializer, AppUserPhotoOnlySerializer
 # from bootstrap.serializers import VideoSerializer, ImageSerializer
 
 
 class QuestionSerializer(serializers.ModelSerializer):
-    # user = AppUserSimpleSerializer(read_only=True)
-    # liked_users = AppUserPhotoOnlySerializer('liked_users', many=True)
-    # tags = serializers.StringRelatedField(many=True)
     isRecent = serializers.SerializerMethodField('was_published_recently')
-    # video_data = serializers.SerializerMethodField('get_video')
 
     def was_published_recently(self,obj):
         return obj.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
-    # def get_image(self, obj):
-    #     if obj.post_type == PostType.IMAGE.value:
-    #         return ImagePostPartialSerializer().to_representation(obj.get_image())
-
-    # def get_video(self, obj):
-    #     if obj.post_type == PostType.VIDEO.value:
-    #         return VideoPostPartialSerializer().to_representation(obj.get_video())
-
     class Meta:
         model = Question
-        fields = ['question_text','pub_date','isRecent' ]
+        fields = ['uuid','question_text','pub_date','isRecent' ]
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
-    # user = AppUserSimpleSerializer('user')
-    # post = serializers.PrimaryKeyRelatedField(read_only=True)
-    # reply_comments = serializers.PrimaryKeyRelatedField(
-    #     many=True, read_only=True)
+
+    user = AppUserSimpleSerializer(read_only=True)
 
     class Meta:
         model = Choice
-        fields = ['question','choice_text','votes']
+        fields = ['question','choice_text','votes','user']
 
 
 # # Simple Serializers

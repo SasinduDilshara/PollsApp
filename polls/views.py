@@ -14,3 +14,11 @@ class ChoiceList(generics.ListAPIView):
     queryset = Choice.objects.all()
     serializer_class = ChoiceSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class SingleQuestionlist(generics.RetrieveAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
