@@ -13,12 +13,13 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ['uuid','question_text','pub_date','isRecent' ]
+        fields = ['question_text','pub_date','isRecent' ]
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
 
-    user = AppUserSimpleSerializer(read_only=True)
+    user = AppUserSimpleSerializer()
+    # user1 = serializers.PrimaryKeyRelatedField(read_only = True)
 
     class Meta:
         model = Choice
